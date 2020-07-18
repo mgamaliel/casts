@@ -1,16 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
 import App from '../shared/app'
+import configureStore from './store/configureStore'
 
 const root = document.getElementById('__root')
+const store = configureStore()
 
 const CastsApp = () => (
-    <BrowserRouter>
+    <Provider store={store}>
 
-        <App />
+        <BrowserRouter>
 
-    </BrowserRouter>
+            <App />
+
+        </BrowserRouter>
+
+    </Provider>
 )
 
 ReactDOM.render(<CastsApp />, root)
