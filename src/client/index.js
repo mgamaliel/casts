@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import App from '../shared/app'
-import configureStore from './store/configureStore'
+import configureStore from '../shared/store/configureStore'
 
 const root = document.getElementById('__root')
-const store = configureStore()
+const preloadedState = window.__PRELOADED_STATE__
+const store = configureStore(preloadedState)
+
+delete window.__PRELOADED_STATE__
 
 const CastsApp = () => (
     <Provider store={store}>
