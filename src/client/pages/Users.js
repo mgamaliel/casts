@@ -25,6 +25,10 @@ const Users = (props) => {
     )
 }
 
+Users.getInitialData = async (ctx) => {
+    await ctx.store.dispatch(fetchUsersAsync())
+}
+
 const mapStateToProps = (state) => ({
     users: selectUsers(state)
 })
