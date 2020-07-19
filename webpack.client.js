@@ -5,6 +5,9 @@ const baseConfig = require('./webpack.config')
 
 module.exports = (env) => {
     const isProduction = env === 'production'
+    const baseURL = isProduction
+        ? '/api'
+        : 'https://react-ssr-api.herokuapp.com'
 
     return merge(baseConfig, {
         entry: './src/client',
@@ -28,7 +31,9 @@ module.exports = (env) => {
             }),
 
             new webpack.DefinePlugin({
-                __isServer__: false
+                __isServer__: false,
+
+                'process.env.BASE_URL_API': JSON.stringify(baseURL)
             })
 
         ],

@@ -25,7 +25,9 @@ module.exports = merge(baseConfig, {
     plugins: [
 
         new webpack.DefinePlugin({
-            __isServer__: true
+            __isServer__: true,
+
+            'process.env.BASE_URL_API': JSON.stringify('https://react-ssr-api.herokuapp.com')
         })
 
     ]
