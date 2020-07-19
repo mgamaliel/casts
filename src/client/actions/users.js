@@ -8,7 +8,7 @@ const fetchUsers = (users) => ({
 
 export const fetchUsersAsync = () => {
     return async (dispatch, _, api) => {
-        const response = await api('https://react-ssr-api.herokuapp.com/users')
+        const response = await api('/users')
 
         return dispatch(fetchUsers(response.data))
     }

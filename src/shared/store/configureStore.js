@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux'
-import axios from 'axios'
 import thunk from 'redux-thunk'
+import axiosInstance from '../../client/config/axios'
 import reducers from '../../client/reducers'
 
 const enhancedCompose = __isServer__
@@ -13,7 +13,7 @@ const configureStore = (initialState = {}) => {
 
         initialState,
 
-        enhancedCompose(applyMiddleware(thunk.withExtraArgument(axios)))
+        enhancedCompose(applyMiddleware(thunk.withExtraArgument(axiosInstance)))
     )
 
     return store

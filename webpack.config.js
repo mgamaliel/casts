@@ -1,4 +1,5 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const webpack = require('webpack')
 
 module.exports = {
     module: {
@@ -17,6 +18,10 @@ module.exports = {
     plugins: [
 
         new CleanWebpackPlugin(),
+
+        new webpack.DefinePlugin({
+            'process.env.BASE_URL_API': JSON.stringify('https://react-ssr-api.herokuapp.com')
+        })
 
     ]
 }
