@@ -11,6 +11,9 @@
       "jsx": true
     }
   },
+  "globals": {
+    "__isServer__": true
+  },
   "env": {
     "node": true,
     "es6": true,
@@ -18,6 +21,7 @@
     "jest": false
   },
   "rules": {
-    "no-console": "warn"
+    "no-console": "warn",
+    "react/prop-types": "off"
   }
 }

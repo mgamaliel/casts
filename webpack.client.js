@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const baseConfig = require('./webpack.config')
 
@@ -24,6 +25,10 @@ module.exports = (env) => {
                 favicon: './src/shared/favicon.png',
 
                 minify: { collapseWhitespace: isProduction },
+            }),
+
+            new webpack.DefinePlugin({
+                __isServer__: false
             })
 
         ],

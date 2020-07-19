@@ -1,4 +1,5 @@
 const NodeExternals = require('webpack-node-externals')
+const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const baseConfig = require('./webpack.config')
 
@@ -19,5 +20,13 @@ module.exports = merge(baseConfig, {
         __dirname: false,
     },
 
-    externals: [NodeExternals()]
+    externals: [NodeExternals()],
+
+    plugins: [
+
+        new webpack.DefinePlugin({
+            __isServer__: true
+        })
+
+    ]
 })

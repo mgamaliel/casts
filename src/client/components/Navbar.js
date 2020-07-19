@@ -6,15 +6,19 @@ const Navbar = () => (
 
         <ul>
             <li>
+
                 <Link to="/">
                     HOME
                 </Link>
+
             </li>
 
             <li>
+
                 <Link to="/users">
                     USERS
                 </Link>
+
             </li>
         </ul>
 
