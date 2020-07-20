@@ -4,23 +4,35 @@ import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import App from '../shared/app'
 import configureStore from '../shared/store/configureStore'
+// actions
+import { fetchCurrentUserAsync } from './actions/user'
 
 const root = document.getElementById('__root')
 const preloadedState = window.__PRELOADED_STATE__
-const store = configureStore(preloadedState)
 
-delete window.__PRELOADED_STATE__
+Promise.resolve()
+    .then(async () => {
+        const store = configureStore(preloadedState)
 
-const CastsApp = () => (
-    <Provider store={store}>
+        await store.dispatch(fetchCurrentUserAsync())
 
-        <BrowserRouter>
+        return store
+    })
+    .then((store) => {
+        const CastsApp = () => (
+            <Provider store={store}>
 
-            <App />
+                <BrowserRouter>
 
-        </BrowserRouter>
+                    <App />
 
-    </Provider>
-)
+                </BrowserRouter>
 
-ReactDOM.render(<CastsApp />, root)
+            </Provider>
+        )
+
+        ReactDOM.render(<CastsApp />, root)
+    })
+    .finally(() => {
+        delete window.__PRELOADED_STATE__
+    })

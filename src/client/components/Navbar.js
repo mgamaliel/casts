@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+// components
+import GoogleButton from './GoogleButton'
 
 const Navbar = () => (
     <nav>
@@ -18,6 +20,12 @@ const Navbar = () => (
                 <Link to="/users">
                     USERS
                 </Link>
+
+            </li>
+
+            <li>
+
+                <GoogleButton />
 
             </li>
         </ul>
