@@ -11,6 +11,12 @@ const privateRoute = (WrappedComponent) => {
             : <Redirect to="/" />
     }
 
+    Component.getInitialData = async (ctx) => {
+        if (WrappedComponent.getInitialData) {
+            await WrappedComponent.getInitialData(ctx)
+        }
+    }
+
     const mapStateToProps = (state) => ({
         isAuthenticated: selectIsAuthenticated(state)
     })

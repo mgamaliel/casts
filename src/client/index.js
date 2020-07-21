@@ -5,8 +5,6 @@ import { Provider } from 'react-redux'
 import App from '../shared/app'
 import configureStore from '../shared/store/configureStore'
 import createAxiosInstance from '../shared/config/axios'
-// actions
-import { fetchCurrentUserAsync } from './actions/user'
 
 const root = document.getElementById('__root')
 const preloadedState = window.__PRELOADED_STATE__
@@ -15,8 +13,6 @@ const axiosInstance = createAxiosInstance()
 Promise.resolve()
     .then(async () => {
         const store = configureStore(preloadedState, axiosInstance)
-
-        await store.dispatch(fetchCurrentUserAsync())
 
         return store
     })

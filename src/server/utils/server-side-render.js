@@ -21,12 +21,15 @@ const handleSSR = async (req, res) => {
     const headers = { cookie }
     const axiosInstance = createAxiosInstance(headers)
     const store = configureStore({}, axiosInstance)
+    const ctx = { req, res, store }
+
+    await App.getInitialData(ctx)
 
     try {
         const currentRoute = routes.find((route) => matchPath(req.url, route))
 
         if (currentRoute && currentRoute.component.getInitialData) {
-            await currentRoute.component.getInitialData({ req, res, store })
+            await currentRoute.component.getInitialData(ctx)
         }
 
         const content = ReactDOMServer.renderToString(
