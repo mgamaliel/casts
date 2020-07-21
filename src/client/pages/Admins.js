@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
 // selectors
 import { selectAdmins } from '../selectors/admins'
@@ -12,6 +13,7 @@ const Admins = (props) => {
 
     return (
         <>
+            <Helmet title="REACT SSR - ADMINS" />
 
             <h1>Admins</h1>
 

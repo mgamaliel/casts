@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import { connect } from 'react-redux'
 // actions
 import { fetchUsersAsync } from '../actions/users'
@@ -12,6 +13,7 @@ const Users = (props) => {
 
     return (
         <>
+            <Helmet title="REACT SSR - USERS" />
 
             <h1>Users</h1>
 

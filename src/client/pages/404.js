@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 
 const NotFound = ({ staticContext }) => {
 
@@ -10,6 +11,8 @@ const NotFound = ({ staticContext }) => {
 
     return (
         <>
+            <Helmet title="REACT SSR - PAGE NOT FOUND" />
+
             404 PAGE NOT FOUND
         </>
     )

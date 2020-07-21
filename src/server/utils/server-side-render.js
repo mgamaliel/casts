@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import serialize from 'serialize-javascript'
+import { Helmet } from 'react-helmet'
 import { StaticRouter, matchPath } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { promisify } from 'util'
@@ -44,7 +45,10 @@ const handleSSR = async (req, res) => {
             </Provider>
         )
 
+        const helmet = Helmet.renderStatic()
+
         const html = data
+            .replace('</head>', `${helmet.title.toString()}</head>`)
             .replace('</head>', `<script>window.__PRELOADED_STATE__ = ${serialize(store.getState())}</script></head>`)
             .replace('<div id="__root"></div>', `<div id="__root">${content}</div>`)
 
