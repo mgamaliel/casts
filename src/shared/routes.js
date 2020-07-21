@@ -1,5 +1,6 @@
 import HomePage from '../client/pages/Home'
 import UsersPage from '../client/pages/Users'
+import AdminsPage from '../client/pages/Admins'
 
 const routes = [
 
@@ -19,6 +20,14 @@ const routes = [
         path: '/users',
 
         component: UsersPage,
+    },
+
+    {
+        id: 3,
+
+        path: '/admins',
+
+        component: AdminsPage
     }
 
 ]

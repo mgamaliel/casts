@@ -25,6 +25,14 @@ const Navbar = () => (
 
             <li>
 
+                <Link to="/admins">
+                    ADMINS
+                </Link>
+
+            </li>
+
+            <li>
+
                 <GoogleButton />
 
             </li>
