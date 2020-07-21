@@ -21,13 +21,14 @@ const handleSSR = async (req, res) => {
     const headers = { cookie }
     const axiosInstance = createAxiosInstance(headers)
     const store = configureStore({}, axiosInstance)
-    const currentRoute = routes.find((route) => matchPath(req.url, route))
-
-    if (currentRoute && currentRoute.component.getInitialData) {
-        await currentRoute.component.getInitialData({ req, res, store })
-    }
 
     try {
+        const currentRoute = routes.find((route) => matchPath(req.url, route))
+
+        if (currentRoute && currentRoute.component.getInitialData) {
+            await currentRoute.component.getInitialData({ req, res, store })
+        }
+
         const content = ReactDOMServer.renderToString(
             <Provider store={store}>
 
@@ -45,8 +46,15 @@ const handleSSR = async (req, res) => {
             .replace('<div id="__root"></div>', `<div id="__root">${content}</div>`)
 
         res.send(html)
-    } catch {
-        res.status(500).send('Internal server error')
+    } catch (error) {
+
+        if (error.isAxiosError) {
+            if (error.response.status === 401) {
+                res.redirect(303, '/')
+            }
+        } else {
+            res.status(500).send('Internal server error')
+        }
     }
 }
 

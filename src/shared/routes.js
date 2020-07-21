@@ -1,6 +1,8 @@
 import HomePage from '../client/pages/Home'
 import UsersPage from '../client/pages/Users'
 import AdminsPage from '../client/pages/Admins'
+// helpers
+import privateRoute from '../client/helpers/privateRoute'
 
 const routes = [
 
@@ -27,7 +29,7 @@ const routes = [
 
         path: '/admins',
 
-        component: AdminsPage
+        component: privateRoute(AdminsPage)
     }
 
 ]
