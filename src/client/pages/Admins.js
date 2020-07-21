@@ -25,6 +25,10 @@ const Admins = (props) => {
     )
 }
 
+Admins.getInitialData = async ({ store }) => {
+    await store.dispatch(fetchAdminsAsync())
+}
+
 const mapStateToProps = (state) => ({
     admins: selectAdmins(state)
 })

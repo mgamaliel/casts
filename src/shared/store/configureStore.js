@@ -1,13 +1,17 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import axiosInstance from '../../client/config/axios'
 import reducers from '../../client/reducers'
 
 const enhancedCompose = __isServer__
     ? compose
     : (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose)
 
-const configureStore = (initialState = {}) => {
+/**
+ * Create redux store
+ * @param {Object} initialState Preloaded state for redux store
+ * @param {Function} axiosInstance Axios instance for async dispatching
+ */
+const configureStore = (initialState = {}, axiosInstance) => {
     const store = createStore(
         reducers,
 

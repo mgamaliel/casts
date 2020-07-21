@@ -9,6 +9,7 @@ import { resolve } from 'path'
 import App from '../../shared/app'
 import configureStore from '../../shared/store/configureStore'
 import routes from '../../shared/routes'
+import createAxiosInstance from '../../shared/config/axios'
 
 const readFileAsync = promisify(readFile)
 const templatePath = resolve(__dirname, 'public/index.html')
@@ -16,7 +17,10 @@ const templatePath = resolve(__dirname, 'public/index.html')
 const handleSSR = async (req, res) => {
     const data = await readFileAsync(templatePath, 'utf8')
     const context = {}
-    const store = configureStore()
+    const cookie = req.get('cookie') || ''
+    const headers = { cookie }
+    const axiosInstance = createAxiosInstance(headers)
+    const store = configureStore({}, axiosInstance)
     const currentRoute = routes.find((route) => matchPath(req.url, route))
 
     if (currentRoute && currentRoute.component.getInitialData) {
