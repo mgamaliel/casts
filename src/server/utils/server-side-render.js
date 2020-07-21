@@ -48,6 +48,10 @@ const handleSSR = async (req, res) => {
             .replace('</head>', `<script>window.__PRELOADED_STATE__ = ${serialize(store.getState())}</script></head>`)
             .replace('<div id="__root"></div>', `<div id="__root">${content}</div>`)
 
+        if (context.notFound) {
+            res.status(404)
+        }
+
         res.send(html)
     } catch (error) {
 
